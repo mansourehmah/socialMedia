@@ -100,7 +100,7 @@ export const SignUp = () => {
 
           <p className="text-sm text-gray-600">
             Already have an account?{" "}
-            <Link to="/sign-in" className="text-blue-600 underline">
+            <Link to="/sign-in" replace className="text-blue-600 underline">
               Sign in
             </Link>
           </p>

@@ -91,7 +91,7 @@ export const SignIn = () => {
 
         <p className="text-sm text-center text-gray-600">
           Don&apos;t have an account?{" "}
-          <Link to="/sign-up" className="text-blue-600 underline">
+          <Link to="/sign-up" replace className="text-blue-600 underline">
             Sign up
           </Link>
         </p>
