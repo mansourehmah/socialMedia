@@ -1,28 +1,27 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "./pages/auth/LoginPage";
-import RegisterPage from "./pages/auth/RegisterPage";
-import HomePage from "./pages/HomePage";
-import ProtectedRoute from "./routes/ProtectedRoute";
+import { RecommendedUsers } from "./components/ui";
+import { useSession } from "./stores";
 
-function App() {
+const App = () => {
+  const session = useSession((s) => s.session);
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Navigate to="/sign-in" />} />
-        <Route path="/sign-in" element={<LoginPage />} />
-        <Route path="/sign-up" element={<RegisterPage />} />
+    <div className="lg:col-span-9">
+      <div className="grid lg:grid-cols-9 gap-5">
+        <div className="lg:col-span-6 border border-red-700">
+          {session && <div className="p-6 m-6 border">add new Post..</div>}
 
-        <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <HomePage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </BrowserRouter>
+          <div className="space-y-5 mb-5">
+            <div>post1</div>
+            <div>post2</div>
+          </div>
+        </div>
+
+        <div className="hidden lg:block lg:col-span-3">
+          <RecommendedUsers />
+        </div>
+      </div>
+    </div>
   );
-}
+};
 
 export default App;
