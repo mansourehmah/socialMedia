@@ -1,14 +1,46 @@
 import { useSession } from "../../stores";
 import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../../lib";
 
 export const Sidebar = () => {
-  const { session } = useSession();
+  const { session, loading } = useSession();
+
+  const [userData, setUserData] = useState<any>(null);
+
+  useEffect(() => {
+    if (!session?.user?.id) return;
+
+    const fetchUser = async () => {
+      try {
+        const res = await axiosInstance.get(`/api/users/${session.user.id}`);
+        console.log(res.data.data);
+        setUserData(res.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchUser();
+  }, [session]);
+
+  if (loading) {
+    return (
+      <aside className="lg:col-span-3">
+        <div className="bg-white border border-[#E5E5E5] rounded-xl p-5 shadow-xl dark:bg-[#0A0A0A] dark:border-[#262626] hidden lg:block">
+          <p className="text-center text-[#737373] dark:text-[#A3A3A3]">
+            Loading profile...
+          </p>
+        </div>
+      </aside>
+    );
+  }
 
   // اگر لاگین نیست → کارت خوش‌آمدگویی
   if (!session) {
     return (
       <aside className="lg:col-span-3">
-        <div className="bg-[#fff] border border-[#E5E5E5] rounded-xl p-5 space-y-6 shadow-xl dark:bg-[#0A0A0A] dark:border-[#262626] hidden lg:block">
+        <div className="bg-white border border-[#E5E5E5] rounded-xl p-5 space-y-6 shadow-xl dark:bg-[#0A0A0A] dark:border-[#262626] hidden lg:block">
           <h2 className="text-xl font-bold text-[#171717] dark:text-[#FAFAFA] text-center">
             Welcome Back!
           </h2>
@@ -37,7 +69,7 @@ export const Sidebar = () => {
   }
 
   // اگر لاگین شده → کارت پروفایل
-  const user = session.user;
+  const user = userData || session.user;
 
   const avatar = user.image ? user.image : user.name?.charAt(0)?.toUpperCase();
 
@@ -74,14 +106,14 @@ export const Sidebar = () => {
         <div className="flex justify-center gap-20 text-sm xl:gap-35">
           <div className="text-center">
             <p className="text-[#171717] dark:text-[#FAFAFA] font-semibold">
-              {user.following ?? 0}
+              {userData?._count?.followings ?? 0}
             </p>
             <p className="text-[#737373] dark:text-[#A3A3A3]">Following</p>
           </div>
 
           <div className="text-center">
             <p className="text-[#171717] dark:text-[#FAFAFA] font-semibold">
-              {user.followers ?? 0}
+              {userData?._count?.followers ?? 0}
             </p>
             <p className="text-[#737373] dark:text-[#A3A3A3]">Followers</p>
           </div>
@@ -89,8 +121,8 @@ export const Sidebar = () => {
         <div className="h-px bg-[#E5E5E5] dark:bg-[#262626]"></div>
         {/* Extra Info */}
         <div className="space-y-2 text-sm text-[#737373] dark:text-[#A3A3A3]">
-          <p>📍 {user.location ?? "No location"}</p>
-          <p>🔗 {user.website ?? "No website"}</p>
+          <p>📍 {userData?.location || "No location"}</p>
+          <p>🔗 {userData?.website || "No website"}</p>
         </div>
       </div>
     </aside>
