@@ -17,9 +17,14 @@ type Session = {
 type User = {
   id: string;
   name: string;
+  username: string;
   email: string;
   emailVerified: boolean;
   image: string | null;
+  location?: string;
+  website?: string;
+  followers?: number;
+  following?: number;
   createdAt: string;
   updatedAt: string;
 };

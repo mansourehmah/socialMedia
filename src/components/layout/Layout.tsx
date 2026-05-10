@@ -15,6 +15,7 @@ export const Layout = () => {
         const res = await axiosInstance.get<ResponseType<SessionType>>(
           "/api/authentication/session",
         );
+        console.log("SESSION RESPONSE DATA:", res.data.data);
         setSession(res.data.data ?? null);
       } catch (error) {
         console.log(error);
