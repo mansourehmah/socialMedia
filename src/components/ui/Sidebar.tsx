@@ -13,7 +13,7 @@ export const Sidebar = () => {
 
   return (
     <div className="hidden lg:block lg:col-span-3">
-      <div className="border">
+      <div className="rounded-xl border border-neutral-800 bg-neutral-900/50 p-4 text-sm text-neutral-300">
         {session ? <AuthenticatedSidebar /> : <NotAuthenticatedSidebar />}
       </div>
     </div>

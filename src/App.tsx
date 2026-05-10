@@ -1,19 +1,12 @@
+import { Feed } from "./components/feed";
 import { RecommendedUsers } from "./components/ui";
-import { useSession } from "./stores";
 
 const App = () => {
-  const session = useSession((s) => s.session);
-
   return (
     <div className="lg:col-span-9">
-      <div className="grid lg:grid-cols-9 gap-5">
-        <div className="lg:col-span-6 border border-red-700">
-          {session && <div className="p-6 m-6 border">add new Post..</div>}
-
-          <div className="space-y-5 mb-5">
-            <div>post1</div>
-            <div>post2</div>
-          </div>
+      <div className="grid gap-5 lg:grid-cols-9">
+        <div className="lg:col-span-6">
+          <Feed />
         </div>
 
         <div className="hidden lg:block lg:col-span-3">
