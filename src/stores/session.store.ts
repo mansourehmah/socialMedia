@@ -10,7 +10,7 @@ type SessionStoreType = {
 
 export const useSession = create<SessionStoreType>((set) => ({
   session: null,
-  loading: false,
+  loading: true,
   setSession: (payload) => set({ session: payload }),
   setLoading: (payload) => set({ loading: payload }),
 }));

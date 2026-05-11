@@ -1,6 +1,8 @@
 type Props = {
   label: string;
   type?: string;
+  name?: string;
+  autoComplete?: string;
   placeholder?: string;
   variant?: "outline" | "filled";
   value?: string;
@@ -11,6 +13,8 @@ type Props = {
 export const Input = ({
   label,
   type = "text",
+  name,
+  autoComplete,
   placeholder,
   variant = "filled",
   value,
@@ -27,6 +31,8 @@ export const Input = ({
       <label className="text-sm text-gray-800 font-medium">{label}</label>
       <input
         type={type}
+        name={name}
+        autoComplete={autoComplete}
         placeholder={placeholder}
         value={value}
         onChange={onChange}

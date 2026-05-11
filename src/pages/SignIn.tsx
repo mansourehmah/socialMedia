@@ -78,6 +78,8 @@ export const SignIn = () => {
           <Input
             label="Email"
             type="email"
+            name="email"
+            autoComplete="email"
             placeholder="example@gmail.com"
             value={formData.email}
             onChange={(e) =>
