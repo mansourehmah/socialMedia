@@ -28,7 +28,7 @@ export const Sidebar = () => {
   if (loading) {
     return (
       <aside className="lg:col-span-3">
-        <div className="hidden lg:flex flex-col bg-white border border-[#E5E5E5] rounded-xl p-5 shadow-xl dark:bg-[#171717] dark:border-[#262626] min-h-[320px]">
+        <div className="hidden lg:flex flex-col bg-white border border-[#E5E5E5] rounded-xl p-5 shadow-xl dark:bg-[#171717] dark:border-[#262626] min-h-80">
           <div className="flex flex-col items-center justify-center flex-1 animate-pulse gap-4">
             {/* Avatar */}
             <div className="w-24 h-24 rounded-full bg-[#e5e5e5] dark:bg-[#1a1a1a]"></div>
