@@ -3,6 +3,7 @@ import { useState, type SubmitEvent } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import { axiosInstance } from "../lib";
+import { getAxiosErrorMessage } from "../lib/errors";
 import type { ResponseType, SignUpType } from "../types";
 import { AuthLayout } from "../components/layout";
 import { Button, Input } from "../components/ui";
@@ -42,8 +43,13 @@ export const SignUp = () => {
       }
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
-        toast.error(error.response.data.error);
+        toast.error(
+          getAxiosErrorMessage(error, "Registration failed"),
+        );
       } else {
+        toast.error(
+          getAxiosErrorMessage(error, "Cannot reach server. Is the API up?"),
+        );
         console.error(error);
       }
     } finally {

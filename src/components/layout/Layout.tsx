@@ -29,9 +29,9 @@ export const Layout = () => {
   }, [setSession, setLoading]);
 
   return (
-    <div className="space-y-5 bg bg-red-50">
+    <div className="min-h-screen space-y-5 bg-neutral-950 text-neutral-100">
       <Header />
-      <div className="container mx-auto px-5 grid lg:grid-cols-12 lg:gap-5">
+      <div className="container mx-auto grid px-5 lg:grid-cols-12 lg:gap-5">
         <Sidebar />
         {loading ? <Loading /> : <Outlet />}
       </div>

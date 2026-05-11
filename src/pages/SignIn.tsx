@@ -3,6 +3,7 @@ import { useState, type SubmitEvent } from "react";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import { axiosInstance } from "../lib";
+import { getAxiosErrorMessage } from "../lib/errors";
 import type { ResponseType, SignInType } from "../types";
 import { Button, Input } from "../components/ui";
 import { AuthLayout } from "../components/layout";
@@ -34,15 +35,24 @@ export const SignIn = () => {
         AxiosResponse<ResponseType<SignInType>>
       >("/api/authentication/login", formData);
 
-      console.log(res.data.data);
       if (res.data.data) {
-        navigate(res.data.data.url);
+        const target = res.data.data.url || "/";
         toast.success(res.data.message);
+        if (/^https?:\/\//i.test(target)) {
+          window.location.assign(target);
+        } else {
+          navigate(target);
+        }
       }
     } catch (error) {
       if (error instanceof AxiosError && error.response) {
-        toast.error(error.response.data.error);
+        toast.error(
+          getAxiosErrorMessage(error, "Login failed"),
+        );
       } else {
+        toast.error(
+          getAxiosErrorMessage(error, "Cannot reach server. Is the API up?"),
+        );
         console.error(error);
       }
     } finally {
