@@ -28,7 +28,7 @@ export const Sidebar = () => {
   if (loading) {
     return (
       <aside className="lg:col-span-3">
-        <div className="hidden lg:flex flex-col bg-white border border-[#E5E5E5] rounded-xl p-5 shadow-xl dark:bg-[#0A0A0A] dark:border-[#262626] min-h-[320px]">
+        <div className="hidden lg:flex flex-col bg-white border border-[#E5E5E5] rounded-xl p-5 shadow-xl dark:bg-[#171717] dark:border-[#262626] min-h-80">
           <div className="flex flex-col items-center justify-center flex-1 animate-pulse gap-4">
             {/* Avatar */}
             <div className="w-24 h-24 rounded-full bg-[#e5e5e5] dark:bg-[#1a1a1a]"></div>
@@ -60,7 +60,7 @@ export const Sidebar = () => {
   if (!session) {
     return (
       <aside className="lg:col-span-3">
-        <div className="bg-white border border-[#E5E5E5] rounded-xl p-5 space-y-6 shadow-xl dark:bg-[#0A0A0A] dark:border-[#262626] hidden lg:block">
+        <div className="bg-white border border-[#E5E5E5] rounded-xl p-5 space-y-6 shadow-xl dark:bg-[#171717] dark:border-[#262626] hidden lg:block">
           <h2 className="text-xl font-bold text-[#171717] dark:text-[#FAFAFA] text-center">
             Welcome Back!
           </h2>
@@ -95,7 +95,7 @@ export const Sidebar = () => {
 
   return (
     <aside className="lg:col-span-3">
-      <div className="bg-white dark:bg-[#0A0A0A] border border-[#E5E5E5] rounded-xl p-5 space-y-6 hidden lg:block">
+      <div className="bg-white dark:bg-[#171717] border border-[#E5E5E5] rounded-xl p-5 space-y-6 hidden lg:block">
         {/* Avatar */}
         <div className="flex justify-center">
           {user.image ? (
